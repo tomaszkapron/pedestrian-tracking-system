@@ -43,7 +43,7 @@ class PicBBox:
             x1 = bbox.getX()
             y1 = bbox.getY()
             w1 = bbox.getWidth()
-            h1 = bbox.bboxList[0].getHeight()
+            h1 = bbox.getHeight()
             ROI = self.frame[y1:y1 + h1, x1:x1 + w1]
             listOfROIs.append(ROI)
         return listOfROIs

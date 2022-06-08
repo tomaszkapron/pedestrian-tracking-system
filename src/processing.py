@@ -4,6 +4,7 @@ from pgmpy.inference import VariableElimination
 
 from src import FeatureMatcher
 from src.utils.loadData import loadFrames
+from src.ROITracker import ROITracker
 
 
 def basicModelMaybeToBeUsed():
@@ -43,12 +44,15 @@ def basicModelMaybeToBeUsed():
 
 
 def main():
-    data = loadFrames("./data")
-    oldROI = data["c6s1_002901.jpg"].getSecondROI()
-    newROI = data["c6s1_002926.jpg"].getSecondROI()
+    data = loadFrames("../data")
     FM = FeatureMatcher.FeatureMatcher()
-    matchesNum = FM.featureMatchVis(oldROI, newROI)
 
+    for name, frame in data.items():
+        if name == "c6s1_002901.jpg":
+            tracker = ROITracker(frame, FM)
+            continue
+
+        tracker.update(frame)
 
 if __name__ == '__main__':
     main()
