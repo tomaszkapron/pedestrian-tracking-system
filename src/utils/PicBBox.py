@@ -50,3 +50,6 @@ class PicBBox:
 
     def getFrame(self):
         return self.frame
+
+    def getNumberOfObjs(self):
+        return len(self.bboxList)

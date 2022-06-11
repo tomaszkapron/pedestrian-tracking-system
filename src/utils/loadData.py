@@ -12,7 +12,7 @@ def loadFrames(pathToDataFolder) -> dict:
                 break
             frame_name = line.strip()
 
-            frame = cv2.imread(f'{pathToDataFolder}/frames/{frame_name}', cv2.IMREAD_GRAYSCALE)
+            frame = cv2.imread(f'{pathToDataFolder}/frames/{frame_name}', cv2.IMREAD_COLOR)
 
             bbox_num = int(f.readline())
             bbox_list = []
@@ -26,7 +26,7 @@ def loadFrames(pathToDataFolder) -> dict:
 
 
 def main():
-    data = loadFrames("../data")
+    data = loadFrames("../../data")
 
     for key, frame in data.items():
         frame.printPicBBox()

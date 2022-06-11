@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 class FeatureMatcher:
     def __init__(self):
         self.MIN_MATCH_COUNT = 4
-        self.FLANN_INDEX_KDTREE = 1
+        self.FLANN_INDEX_KDTREE = 2
         self.swift = cv2.SIFT_create()
 
     def featureMatchVis(self, oldROI: np.ndarray, newROI: np.ndarray, vis=True) -> int:
@@ -17,11 +17,15 @@ class FeatureMatcher:
 
         :return int value of good matches between two ROIs
         """
+        # convert to grayscale
+        newROI = cv2.cvtColor(newROI, cv2.COLOR_BGR2GRAY)
+        oldROI = cv2.cvtColor(oldROI, cv2.COLOR_BGR2GRAY)
+
         # find the keypoints and descriptors with SIFT
         kp1, des1 = self.swift.detectAndCompute(newROI, None)
         kp2, des2 = self.swift.detectAndCompute(oldROI, None)
 
-        index_params = dict(algorithm=self.FLANN_INDEX_KDTREE, trees=5)
+        index_params = dict(algorithm=self.FLANN_INDEX_KDTREE, trees=10)
         search_params = dict(checks=50)
         flann = cv2.FlannBasedMatcher(index_params, search_params)
         matches = flann.knnMatch(des1, des2, k=2)
@@ -55,5 +59,30 @@ class FeatureMatcher:
 
         else:
             print("Not enough matches are found - {}/{}".format(len(good), self.MIN_MATCH_COUNT))
+            if vis:
+                img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None)
+                plt.imshow(img3, 'gray'), plt.show()
             matchesMask = None
             return 0
+
+    def featureMatchORBvis(self, oldROI: np.ndarray, newROI: np.ndarray, vis=True) -> int:
+        img1 = newROI
+        img2 = oldROI
+        # Initiate ORB detector
+        orb = cv2.ORB_create()
+        # find the keypoints and descriptors with ORB
+        kp1, des1 = orb.detectAndCompute(img1, None)
+        kp2, des2 = orb.detectAndCompute(img2, None)
+
+        # create BFMatcher object
+        bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+        # Match descriptors.
+        matches = bf.match(des1, des2)
+        # Sort them in the order of their distance.
+        matches = sorted(matches, key=lambda x: x.distance)
+        # Draw first 10 matches.
+        img3 = cv2.drawMatches(img1, kp1, img2, kp2, matches[:10], None,
+                               flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+        plt.imshow(img3), plt.show()
+
+        return len(matches)
