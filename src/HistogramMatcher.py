@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from utils import loadData
 
 
 class HistMatcher:
@@ -31,10 +30,4 @@ class HistMatcher:
         hist_new = cv2.calcHist([hsv_new], self.channels, None, self.histSize, self.ranges, accumulate=False)
         cv2.normalize(hist_new, hist_new, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX)
 
-        # TODO: return
-        result = cv2.compareHist(hist_old, hist_new, 0)
-        return result
-
-
-if __name__ == "__main__":
-    pass
+        return cv2.compareHist(hist_old, hist_new, 0)

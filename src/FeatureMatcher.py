@@ -37,10 +37,14 @@ class FeatureMatcher:
                 good.append(m)
 
         if len(good) > self.MIN_MATCH_COUNT:
-            print("Enough matches are found - {}/{}".format(len(good), self.MIN_MATCH_COUNT))
+            # print("Enough matches are found - {}/{}".format(len(good), self.MIN_MATCH_COUNT))
             src_pts = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
             dst_pts = np.float32([kp2[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
-            M, mask = cv2.findHomography(src_pts, dst_pts)
+            M, mask = cv2.findHomography(src_pts, dst_pts, method=cv2.RANSAC)
+            if M is None:
+                M = np.float32([[1.05764315e-02, -2.96058593e-01, 4.90867768e+01],
+                                [-1.58998786e-01, -2.86754871e-01, 6.31794145e+01],
+                                [-8.05060010e-04, -5.48503251e-03, 1.00000000e+00]])
             matchesMask = mask.ravel().tolist()
             h, w = newROI.shape
             pts = np.float32([[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]).reshape(-1, 1, 2)
@@ -58,7 +62,7 @@ class FeatureMatcher:
             return len(good)
 
         else:
-            print("Not enough matches are found - {}/{}".format(len(good), self.MIN_MATCH_COUNT))
+            # print("Not enough matches are found - {}/{}".format(len(good), self.MIN_MATCH_COUNT))
             if vis:
                 img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None)
                 plt.imshow(img3, 'gray'), plt.show()

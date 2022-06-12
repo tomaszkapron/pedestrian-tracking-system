@@ -21,6 +21,24 @@ class PicBBox:
         cv2.waitKey(0)
         cv2.destroyWindow("frame")
 
+    def printTwoPics(self, second):
+        cv2.namedWindow("TwoFrames")
+        # concatenate image Vertically
+        img = np.concatenate((self.frame, second), axis=0)
+
+        scale_percent = 40  # percent of original size
+        width = int(img.shape[1] * scale_percent / 100)
+        height = int(img.shape[0] * scale_percent / 100)
+        dim = (width, height)
+
+        # resize image
+        resized = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
+
+        cv2.imshow('TwoFrames', resized)
+
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
     def getFirstROI(self):
         x1 = self.bboxList[0].getX()
         y1 = self.bboxList[0].getY()
