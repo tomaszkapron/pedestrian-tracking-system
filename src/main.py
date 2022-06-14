@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from src.utils.loadData import loadFrames, loadFramesGenerator
+from src.utils.loadData import loadFramesGenerator
 from src.ROITracker import ROITracker
 from src.FeatureMatcher import FeatureMatcher
 from src.HistogramMatcher import HistMatcher

@@ -37,6 +37,12 @@ class GraphModel:
         self.model = createModel()
 
     def query(self, featEvidence, histEvidence, dirEvidence=None):
+        """
+        :param featEvidence:
+        :param histEvidence:
+        :param dirEvidence:
+        :return: probability of two ROIs matching
+        """
         if dirEvidence:
             q = self.model.query(['ObjMatch'], evidence={'dir': dirEvidence,
                                                          'FeatMatch': featEvidence,

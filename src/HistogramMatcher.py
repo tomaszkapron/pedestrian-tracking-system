@@ -14,12 +14,12 @@ class HistMatcher:
         # Use the 0-th and 1-st channels
         self.channels = [0, 1]
 
-    def histMatch(self, oldROI: np.ndarray, newROI: np.ndarray) -> int:
+    def histMatch(self, oldROI: np.ndarray, newROI: np.ndarray) -> float:
         """
         :param oldROI
         :param newROI
 
-        :return int value describing how similar two rois are
+        :return float value describing how similar two rois are (0 - 1)
         """
         hsv_old = cv2.cvtColor(oldROI, cv2.COLOR_BGR2HSV)
         hsv_new = cv2.cvtColor(newROI, cv2.COLOR_BGR2HSV)
