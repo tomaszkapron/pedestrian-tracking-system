@@ -7,7 +7,7 @@ class FeatureMatcher:
     def __init__(self):
         self.MIN_MATCH_COUNT = 4
         self.FLANN_INDEX_KDTREE = 2
-        self.swift = cv2.SIFT_create()
+        self.sift = cv2.SIFT_create()
 
     def featureMatchVis(self, oldROI: np.ndarray, newROI: np.ndarray, vis=True) -> int:
         """
@@ -22,8 +22,8 @@ class FeatureMatcher:
         oldROI = cv2.cvtColor(oldROI, cv2.COLOR_BGR2GRAY)
 
         # find the keypoints and descriptors with SIFT
-        kp1, des1 = self.swift.detectAndCompute(newROI, None)
-        kp2, des2 = self.swift.detectAndCompute(oldROI, None)
+        kp1, des1 = self.sift.detectAndCompute(newROI, None)
+        kp2, des2 = self.sift.detectAndCompute(oldROI, None)
 
         index_params = dict(algorithm=self.FLANN_INDEX_KDTREE, trees=10)
         search_params = dict(checks=50)

@@ -75,7 +75,7 @@ class ROITracker:
             histMatchesList = []
 
             for nextRoi in nextROIs:
-                featMatchNum = self.FM.featureMatchVis(currRoi, nextRoi, vis=False)
+                featMatchNum = self.FM.featureMatchVis(currRoi, nextRoi, vis=True)
                 histResult = self.HM.histMatch(currRoi, nextRoi)
 
                 featureMatchesList.append(featMatchNum)
