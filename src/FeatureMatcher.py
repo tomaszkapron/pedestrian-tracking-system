@@ -21,6 +21,7 @@ class FeatureMatcher:
         newROI = cv2.cvtColor(newROI, cv2.COLOR_BGR2GRAY)
         oldROI = cv2.cvtColor(oldROI, cv2.COLOR_BGR2GRAY)
 
+        # TODO Brak zaznaczonego źródła kodu!
         # find the keypoints and descriptors with SIFT
         kp1, des1 = self.sift.detectAndCompute(newROI, None)
         kp2, des2 = self.sift.detectAndCompute(oldROI, None)
