@@ -1,6 +1,11 @@
+"""
+    code based on:
+    https://docs.opencv.org/3.4/d1/de0/tutorial_py_feature_homography.html
+"""
+
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 class FeatureMatcher:
@@ -52,21 +57,21 @@ class FeatureMatcher:
             dst = cv2.perspectiveTransform(pts, M)
             img2 = cv2.polylines(oldROI, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
 
-            if vis:
-                draw_params = dict(matchColor=(0, 255, 0),  # draw matches in green color
-                                   singlePointColor=None,
-                                   matchesMask=matchesMask,  # draw only inliers
-                                   flags=2)
-                img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None, **draw_params)
-                plt.imshow(img3, 'gray'), plt.show()
+            # if vis:
+            #     draw_params = dict(matchColor=(0, 255, 0),  # draw matches in green color
+            #                        singlePointColor=None,
+            #                        matchesMask=matchesMask,  # draw only inliers
+            #                        flags=2)
+            #     img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None, **draw_params)
+            #     plt.imshow(img3, 'gray'), plt.show()
 
             return len(good)
 
         else:
             # print("Not enough matches are found - {}/{}".format(len(good), self.MIN_MATCH_COUNT))
-            if vis:
-                img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None)
-                plt.imshow(img3, 'gray'), plt.show()
+            # if vis:
+            #     img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None)
+            #     plt.imshow(img3, 'gray'), plt.show()
             matchesMask = None
             return 0
 
