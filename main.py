@@ -12,20 +12,29 @@ from src.GraphModel import GraphModel
 # TODO Kod przejrzysty i dobrze udokumentowany.
 
 # TODO Skuteczność śledzenia 0.0 (0/5)
-# TODO [0.00, 0.50) - 0.0
-# TODO [0.50, 0.55) - 0.5
-# TODO [0.55, 0.60) - 1.0
-# TODO [0.60, 0.65) - 1.5
-# TODO [0.65, 0.70) - 2.0
-# TODO [0.70, 0.75) - 2.5
-# TODO [0.75, 0.80) - 3.0
-# TODO [0.80, 0.85) - 3.5
-# TODO [0.85, 0.90) - 4.0
-# TODO [0.90, 0.95) - 4.5
-# TODO [0.95, 1.00) - 5.0
+# TODO [0.00, 0.0] - 0.0
+# TODO (0.0, 0.1) - 0.5
+# TODO [0.1, 0.2) - 1.0
+# TODO [0.2, 0.3) - 1.5
+# TODO [0.3, 0.4) - 2.0
+# TODO [0.4, 0.5) - 2.5
+# TODO [0.5, 0.6) - 3.0
+# TODO [0.6, 0.7) - 3.5
+# TODO [0.7, 0.8) - 4.0
+# TODO [0.8, 0.9) - 4.5
+# TODO [0.9, 1.0) - 5.0
 
 # stderr:
-# python3: can't open file 'main.py': [Errno 2] No such file or directory
+# Traceback (most recent call last):
+#   File "main.py", line 4, in <module>
+#     from src.utils.loadData import loadFramesGenerator
+#   File "/home/janw/dydaktyka/2021_2022/lato/SI/projekt/evaluation/Kapron_Tomasz/src/utils/loadData.py", line 2, in <module>
+#     from src.utils.PicBBox import BBox
+#   File "/home/janw/dydaktyka/2021_2022/lato/SI/projekt/evaluation/Kapron_Tomasz/src/utils/PicBBox.py", line 28, in <module>
+#     class PicBBox:
+#   File "/home/janw/dydaktyka/2021_2022/lato/SI/projekt/evaluation/Kapron_Tomasz/src/utils/PicBBox.py", line 29, in PicBBox
+#     def __init__(self, frame: np.ndarray, bboxList: list[BBox]):
+# TypeError: 'type' object is not subscriptable
 
 def processData():
     parser = argparse.ArgumentParser()
