@@ -3,6 +3,9 @@
 The project involves the creation of a pedestrian tracking system using probabilistic graphical models. The system is
 designed to determine the location of passers-by in successive camera frames by assigning Bounding Boxes to individuals.
 
+## Requirments
+* Python3.9
+
 ## Concept
 
 Idea behind project is to determine set of features for every pedestrian on frame, and every pedestrian on the following
