@@ -68,14 +68,11 @@ class ROITracker:
         featureMatches = dict()
         histMatches = dict()
         for count, currRoi in enumerate(currentROIs):
-            # print("_____________________________________________________________________________")
-            # print(f"\nprocessing {count} bbox, with has id: {self.trackedObjects[count].objectId}")
-            # print()
             featureMatchesList = []
             histMatchesList = []
 
             for nextRoi in nextROIs:
-                featMatchNum = self.FM.featureMatchVis(currRoi, nextRoi, vis=True)
+                featMatchNum = self.FM.featureMatchVis(currRoi, nextRoi, vis=False)
                 histResult = self.HM.histMatch(currRoi, nextRoi)
 
                 featureMatchesList.append(featMatchNum)
