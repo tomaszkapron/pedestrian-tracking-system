@@ -11,7 +11,7 @@ from src.GraphModel import GraphModel
 # TODO Raport przejrzysty i wyczerpujący.
 # TODO Kod przejrzysty i dobrze udokumentowany.
 
-# TODO Skuteczność śledzenia 0.0 (0/5)
+# TODO Skuteczność śledzenia 0.457 (2.5/5)
 # TODO [0.00, 0.0] - 0.0
 # TODO (0.0, 0.1) - 0.5
 # TODO [0.1, 0.2) - 1.0
@@ -24,17 +24,7 @@ from src.GraphModel import GraphModel
 # TODO [0.8, 0.9) - 4.5
 # TODO [0.9, 1.0) - 5.0
 
-# stderr:
-# Traceback (most recent call last):
-#   File "main.py", line 4, in <module>
-#     from src.utils.loadData import loadFramesGenerator
-#   File "/home/janw/dydaktyka/2021_2022/lato/SI/projekt/evaluation/Kapron_Tomasz/src/utils/loadData.py", line 2, in <module>
-#     from src.utils.PicBBox import BBox
-#   File "/home/janw/dydaktyka/2021_2022/lato/SI/projekt/evaluation/Kapron_Tomasz/src/utils/PicBBox.py", line 28, in <module>
-#     class PicBBox:
-#   File "/home/janw/dydaktyka/2021_2022/lato/SI/projekt/evaluation/Kapron_Tomasz/src/utils/PicBBox.py", line 29, in PicBBox
-#     def __init__(self, frame: np.ndarray, bboxList: list[BBox]):
-# TypeError: 'type' object is not subscriptable
+# TODO Brakuje jednej linijki na wyjściu.
 
 def processData():
     parser = argparse.ArgumentParser()

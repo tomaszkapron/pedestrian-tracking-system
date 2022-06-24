@@ -1,5 +1,5 @@
 import copy
-from typing import Any
+from typing import Any, List
 
 from src.utils import PicBBox
 from src.utils.utils import getRepeats
@@ -228,7 +228,7 @@ class ROITracker:
         return listOfTrackedIds
 
     @staticmethod
-    def getListOfFreeIds(numberOfIdsNeeded: int, takenIds: list[int]) -> list[int]:
+    def getListOfFreeIds(numberOfIdsNeeded: int, takenIds: List[int]) -> List[int]:
         freeIds = []
         suspectId = 0
         while len(freeIds) != numberOfIdsNeeded:

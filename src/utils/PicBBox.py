@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from typing import List
 
 
 class BBox:
@@ -26,7 +27,7 @@ class BBox:
 
 
 class PicBBox:
-    def __init__(self, frame: np.ndarray, bboxList: list[BBox]):
+    def __init__(self, frame: np.ndarray, bboxList: List[BBox]):
         self.frame = frame
         self.bboxList = bboxList
 
@@ -76,7 +77,7 @@ class PicBBox:
         ROI = self.frame[y1:y1 + h1, x1:x1 + w1]
         return ROI
 
-    def getROIS(self) -> list[np.ndarray]:
+    def getROIS(self) -> List[np.ndarray]:
         listOfROIs = []
         for bbox in self.bboxList:
             x1 = bbox.getX()
