@@ -54,7 +54,6 @@ class ROITracker:
         featureMatches, histMatches = self.processROIs(currentROIs, nextROIs)
         normFeature, normHist = self.normalizeForGraph(copy.deepcopy(featureMatches), copy.deepcopy(histMatches))
         self.deductingWithGraph(normFeature, normHist)
-        # self.currentFrame.printTwoPics(self.nextFrame.frame)
 
     def processROIs(self, currentROIs: list, nextROIs: list) -> (dict, dict):
         """
@@ -117,7 +116,7 @@ class ROITracker:
         2) Delete every entry with the highest probability lower than 0.3
         3) If all the list indexes in alle sets are unique stop the algorithm - it means that's there is trivial case,
            and there are no more than 1 matches to 1 ROI on next frame
-        4) Change the lowest probability multimatch to next highest probality and update supportMatchesDict with new
+        4) Change the lowest probability multimatch to next highest probability and update supportMatchesDict with new
            value
         5) Goto step 2
 

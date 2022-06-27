@@ -5,7 +5,7 @@
 
 import cv2
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 class FeatureMatcher:
@@ -26,7 +26,6 @@ class FeatureMatcher:
         newROI = cv2.cvtColor(newROI, cv2.COLOR_BGR2GRAY)
         oldROI = cv2.cvtColor(oldROI, cv2.COLOR_BGR2GRAY)
 
-        # TODO Brak zaznaczonego źródła kodu!
         # find the keypoints and descriptors with SIFT
         kp1, des1 = self.sift.detectAndCompute(newROI, None)
         kp2, des2 = self.sift.detectAndCompute(oldROI, None)
@@ -57,21 +56,21 @@ class FeatureMatcher:
             dst = cv2.perspectiveTransform(pts, M)
             img2 = cv2.polylines(oldROI, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
 
-            # if vis:
-            #     draw_params = dict(matchColor=(0, 255, 0),  # draw matches in green color
-            #                        singlePointColor=None,
-            #                        matchesMask=matchesMask,  # draw only inliers
-            #                        flags=2)
-            #     img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None, **draw_params)
-            #     plt.imshow(img3, 'gray'), plt.show()
+            if vis:
+                draw_params = dict(matchColor=(0, 255, 0),  # draw matches in green color
+                                   singlePointColor=None,
+                                   matchesMask=matchesMask,  # draw only inliers
+                                   flags=2)
+                img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None, **draw_params)
+                plt.imshow(img3, 'gray'), plt.show()
 
             return len(good)
 
         else:
-            # print("Not enough matches are found - {}/{}".format(len(good), self.MIN_MATCH_COUNT))
-            # if vis:
-            #     img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None)
-            #     plt.imshow(img3, 'gray'), plt.show()
+            print("Not enough matches are found - {}/{}".format(len(good), self.MIN_MATCH_COUNT))
+            if vis:
+                img3 = cv2.drawMatches(newROI, kp1, oldROI, kp2, good, None)
+                plt.imshow(img3, 'gray'), plt.show()
             matchesMask = None
             return 0
 
